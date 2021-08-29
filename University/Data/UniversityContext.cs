@@ -12,12 +12,16 @@ namespace University.Data
         public DbSet<Status> Status { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Group>().ToTable("Group");
             modelBuilder.Entity<Status>().ToTable("Status");
             modelBuilder.Entity<Attendance>().ToTable("Attendance");
             modelBuilder.Entity<Student>().ToTable("Student");
+            modelBuilder.Entity<Faculty>().ToTable("Faculty");
+            modelBuilder.Entity<Subject>().ToTable("Subject");
         }
     }
 }

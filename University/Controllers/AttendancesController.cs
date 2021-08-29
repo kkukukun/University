@@ -22,7 +22,7 @@ namespace University.Controllers
         // GET: Attendances
         public async Task<IActionResult> Index()
         {
-            var universityContext = _context.Attendances.Include(a => a.Status).Include(a => a.Student);
+            var universityContext = _context.Attendances.Include(a => a.Status).Include(a => a.Student).Include(a => a.Subject);
             return View(await universityContext.ToListAsync());
         }
 
@@ -37,6 +37,7 @@ namespace University.Controllers
             var attendance = await _context.Attendances
                 .Include(a => a.Status)
                 .Include(a => a.Student)
+                .Include(a => a.Subject)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (attendance == null)
             {
@@ -50,7 +51,8 @@ namespace University.Controllers
         public IActionResult Create()
         {
             ViewData["StatusID"] = new SelectList(_context.Status, "Id", "Id");
-            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "ID");
+            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "FirstMidName");
+            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Id");
             return View();
         }
 
@@ -59,7 +61,7 @@ namespace University.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Subject,Hours,Date,StatusID,StudentID")] Attendance attendance)
+        public async Task<IActionResult> Create([Bind("Id,Hours,Date_Attendance,StatusID,SubjectID,StudentID")] Attendance attendance)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +70,8 @@ namespace University.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StatusID"] = new SelectList(_context.Status, "Id", "Id", attendance.StatusID);
-            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "ID", attendance.StudentID);
+            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "FirstMidName", attendance.StudentID);
+            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Id", attendance.SubjectID);
             return View(attendance);
         }
 
@@ -86,7 +89,8 @@ namespace University.Controllers
                 return NotFound();
             }
             ViewData["StatusID"] = new SelectList(_context.Status, "Id", "Id", attendance.StatusID);
-            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "ID", attendance.StudentID);
+            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "FirstMidName", attendance.StudentID);
+            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Id", attendance.SubjectID);
             return View(attendance);
         }
 
@@ -95,7 +99,7 @@ namespace University.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Subject,Hours,Date,StatusID,StudentID")] Attendance attendance)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Hours,Date_Attendance,StatusID,SubjectID,StudentID")] Attendance attendance)
         {
             if (id != attendance.Id)
             {
@@ -123,7 +127,8 @@ namespace University.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StatusID"] = new SelectList(_context.Status, "Id", "Id", attendance.StatusID);
-            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "ID", attendance.StudentID);
+            ViewData["StudentID"] = new SelectList(_context.Students, "ID", "FirstMidName", attendance.StudentID);
+            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Id", attendance.SubjectID);
             return View(attendance);
         }
 
@@ -138,6 +143,7 @@ namespace University.Controllers
             var attendance = await _context.Attendances
                 .Include(a => a.Status)
                 .Include(a => a.Student)
+                .Include(a => a.Subject)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (attendance == null)
             {
