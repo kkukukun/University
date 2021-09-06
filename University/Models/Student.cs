@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace University.Models
 {
@@ -12,25 +9,25 @@ namespace University.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Имя")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Фамилия")]
         public string FirstMidName { get; set; }
 
-        [Display(Name = "Enrollment Date")]
+        [Display(Name = "Дата зачисления")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-
         public DateTime EnrollmentDate { get; set; }
-        [Display(Name = "Full Name")]
+        [Display(Name = "Фамилия Имя")]
         public string FullName
         {
             get
             {
-                return LastName + ", " + FirstMidName;
+                return FirstMidName +" "+ LastName;
             }
         }
+        [Display(Name = "Группа")]
         public Group Group { get; set; }
         public int GroupId { get; set; }
         public ICollection<Attendance> Attendances { get; set; }

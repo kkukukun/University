@@ -50,9 +50,9 @@ namespace University.Controllers
         // GET: Attendances/Create
         public IActionResult Create()
         {
-            ViewData["StatusID"] = new SelectList(_context.Status, "Id", "Id");
+            ViewData["StatusID"] = new SelectList(_context.Status, "Id", "StatusName");
             ViewData["StudentID"] = new SelectList(_context.Students, "ID", "FirstMidName");
-            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Id");
+            ViewData["SubjectID"] = new SelectList(_context.Subjects, "Id", "Name_Subject");
             return View();
         }
 

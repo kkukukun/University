@@ -1,6 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-.bd-placeholder-img {
+﻿.bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
     -webkit-user-select: none;
@@ -32,6 +30,12 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+.button3 {
+    background-color: #f44336;
+    color: #fff;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -77,6 +81,8 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color:cornsilk;
+  background-image: url(../assetc/img/190-1903674_big-image-transparent-png-seamless-patterns-flowers.png)
 }
 .footer {
   position: absolute;
@@ -84,4 +90,10 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+.bg-primary {
+    background-color: #1a52c6;
+}
+.contrau {
+background-color:white;
 }
